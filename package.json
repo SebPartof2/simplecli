@@ -1,5 +1,5 @@
 {
-  "name": "simplecli",
+  "name": "simpleclitools",
   "version": "0.1.0",
   "description": "A personal CLI to shorten common dev commands",
   "type": "module",
