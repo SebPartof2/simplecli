@@ -1,5 +1,6 @@
 import { defineCommand } from "citty";
 import { execSync, spawnSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import { platform } from "node:process";
 
 type OS = "win" | "mac" | "linux";
@@ -76,7 +77,21 @@ function installVSCode(os: OS) {
   else run("snap install code --classic");
 }
 
+function isChromeInstalled(os: OS): boolean {
+  if (os === "win") {
+    return (
+      existsSync("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe") ||
+      existsSync("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe")
+    );
+  }
+  if (os === "mac") {
+    return existsSync("/Applications/Google Chrome.app");
+  }
+  return isInstalled("google-chrome") || isInstalled("google-chrome-stable");
+}
+
 function installChrome(os: OS) {
+  if (isChromeInstalled(os)) { skip("Chrome"); return; }
   log("Installing Chrome...");
   if (os === "win") run("winget install Google.Chrome");
   else if (os === "mac") run("brew install --cask google-chrome");
