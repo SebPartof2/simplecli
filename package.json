@@ -1,0 +1,22 @@
+{
+  "name": "simplecli",
+  "version": "0.1.0",
+  "description": "A personal CLI to shorten common dev commands",
+  "type": "module",
+  "bin": {
+    "sli": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "jiti src/index.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "citty": "^0.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "jiti": "^1.21.0",
+    "typescript": "^5.0.0"
+  }
+}
